@@ -1,3 +1,4 @@
+
 -- Pet Mutation Finder with Styled ESP + Credit Footer
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -19,24 +20,23 @@ gui.ResetOnSpawn = false
 gui.Parent = PlayerGui
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 220, 0, 185)
+frame.Size = UDim2.new(0, 220, 0, 120) -- Adjusted height for better fit
 frame.Position = UDim2.new(0.4, 0, 0.4, 0)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-frame.BorderColor3 = Color3.fromRGB(80, 80, 90)
-frame.BorderSizePixel = 2
+frame.BackgroundColor3 = Color3.fromRGB(0, 128, 128) -- Teal color
+frame.BackgroundTransparency = 0.1 -- Retain transparency
+frame.BorderSizePixel = 0 -- No border
 frame.Active = true
 frame.Draggable = true
 frame.Parent = gui
 
 Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
-Instance.new("UIStroke", frame).Color = Color3.fromRGB(100, 100, 110)
 
 local title = Instance.new("TextLabel", frame)
-title.Size = UDim2.new(1, 0, 0, 35)
-title.Text = "Pet Mutation Predictor"
+title.Size = UDim2.new(1, 0, 0, 30) -- Adjusted height
+title.Text = "🔬 Pet Mutation Finder"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 1
-title.Font = Enum.Font.GothamBold
+title.Font = Enum.Font.FredokaOne -- Updated font
 title.TextSize = 18
 
 local function createButton(text, yPos, color)
@@ -45,15 +45,14 @@ local function createButton(text, yPos, color)
 	btn.Position = UDim2.new(0.05, 0, 0, yPos)
 	btn.BackgroundColor3 = color
 	btn.Text = text
-	btn.Font = Enum.Font.GothamMedium
+	btn.Font = Enum.Font.FredokaOne -- Updated font
 	btn.TextSize = 16
-	btn.TextColor3 = Color3.new(0, 0, 0)
+	btn.TextColor3 = Color3.new(1, 1, 1) -- White text color
 	btn.AutoButtonColor = false
 
-	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
-	local stroke = Instance.new("UIStroke", btn)
-	stroke.Color = Color3.fromRGB(0, 0, 0)
-	stroke.Thickness = 1.2
+	-- REMOVE or COMMENT OUT the next line for rectangle buttons:
+	-- Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+	-- No UIStroke!
 
 	btn.MouseEnter:Connect(function()
 		TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = color:Lerp(Color3.new(1,1,1), 0.2)}):Play()
@@ -66,20 +65,11 @@ local function createButton(text, yPos, color)
 	return btn
 end
 
-local reroll = createButton("Reroll Mutation", 45, Color3.fromRGB(140, 200, 255))
-local toggle = createButton("Toggle Mutation", 90, Color3.fromRGB(180, 255, 180))
+local reroll = createButton("🎲 Mutation Reroll", 40, Color3.fromRGB(128, 0, 128)) -- Purple color
+local toggle = createButton("👁 Toggle Mutation ESP", 80, Color3.fromRGB(128, 128, 0)) -- Olive color
 
--- Ã°Å¸ÂÂ· Credit label at the bottom
-local credit = Instance.new("TextLabel", frame)
-credit.Size = UDim2.new(1, 0, 0, 20)
-credit.Position = UDim2.new(0, 0, 1, -20)
-credit.Text = "Made by KeanDiamlaCoder"
-credit.TextColor3 = Color3.fromRGB(200, 200, 200)
-credit.BackgroundTransparency = 1
-credit.Font = Enum.Font.Gotham
-credit.TextSize = 13
 
--- Ã°Å¸â€Â Find mutation machine
+-- 🔍 Find mutation machine
 local function findMachine()
 	for _, obj in pairs(Workspace:GetDescendants()) do
 		if obj:IsA("Model") and obj.Name:lower():find("mutation") then
@@ -96,7 +86,7 @@ end
 
 local basePart = machine:FindFirstChildWhichIsA("BasePart")
 
--- Ã°Å¸â€™Â¡ Stylish ESP
+-- 💡 Stylish ESP
 local espGui = Instance.new("BillboardGui", basePart)
 espGui.Name = "MutationESP"
 espGui.Adornee = basePart
@@ -113,7 +103,7 @@ espLabel.TextStrokeTransparency = 0.3
 espLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
 espLabel.Text = currentMutation
 
--- Ã°Å¸Å’Ë† Animate rainbow color
+-- 🌈 Animate rainbow color
 local hue = 0
 RunService.RenderStepped:Connect(function()
 	if espVisible then
@@ -122,9 +112,9 @@ RunService.RenderStepped:Connect(function()
 	end
 end)
 
--- Ã¢â„¢Â»Ã¯Â¸Â Reroll effect
+-- ♻️ Reroll effect
 local function animateMutationReroll()
-	reroll.Text = "Rerolling..."
+	reroll.Text = "⏳ Rerolling..."
 	local duration = 2
 	local interval = 0.1
 	for i = 1, math.floor(duration / interval) do
@@ -133,7 +123,7 @@ local function animateMutationReroll()
 	end
 	currentMutation = mutations[math.random(#mutations)]
 	espLabel.Text = currentMutation
-	reroll.Text = "Mutation Reroll"
+	reroll.Text = "🎲 Mutation Reroll"
 end
 
 toggle.MouseButton1Click:Connect(function()
