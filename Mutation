@@ -1,4 +1,4 @@
--- Pet Mutation Finder with Styled ESP + Credit Footer
+d-- Pet Mutation Finder with Styled ESP + Credit Footer
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local PlayerGui = player:WaitForChild("PlayerGui")
@@ -133,7 +133,7 @@ local function animateMutationReroll()
 	end
 	currentMutation = mutations[math.random(#mutations)]
 	espLabel.Text = currentMutation
-	reroll.Text = "Rerolling...."
+	reroll.Text = "Reroll Mutation"
 end
 
 toggle.MouseButton1Click:Connect(function()
